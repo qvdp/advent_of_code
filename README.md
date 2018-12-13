@@ -15,4 +15,4 @@ For each days, the compilation / installation rules are described in a file name
 ## Self-Promotion
 
 Like this? Follow the repository on
-[GitHub](https://github.com/tpope).
+[GitHub](https://github.com/qvdp).
