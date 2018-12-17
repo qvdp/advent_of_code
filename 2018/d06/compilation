@@ -1,0 +1,8 @@
+part_1
+  clang  -Wall -Wextra -Werror -I ../libft/includes -o part_1.o -c part_1.c &&
+  clang -o part_1 part_1.o -I ../libft/includes -L ../libft/ -lft &&
+  rm ./part_1.o
+part_2
+  clang  -Wall -Wextra -Werror -I ../libft/includes -o part_2.o -c part_2.c &&
+  clang -o part_2 part_2.o -I ../libft/includes -L ../libft/ -lft
+  rm ./part_2.o
