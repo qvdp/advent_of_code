@@ -4,7 +4,6 @@
 #include "header.h"
 #include "libft.h"
 
-
 static char **ft_build_map(t_coor **list, int sqre_size)
 {
 	int		i;
@@ -25,7 +24,7 @@ static char **ft_build_map(t_coor **list, int sqre_size)
 	tmp_list = (*list);
 	while (tmp_list)
 	{
-		tab[GET_Y(tmp_list->start)][GET_X(tmp_list->start)] = tmp_list->id;
+		tab[tmp_list->start_y][tmp_list->start_x] = tmp_list->id;
 		tmp_list = tmp_list->next;
 	}
 	return (tab);
@@ -40,13 +39,10 @@ static int  ft_get_square_size(t_coor **list)
 	tmp_list = (*list);
 	while (tmp_list)
 	{
-		if (GET_X(tmp_list->start) > max || GET_Y(tmp_list->start) > max)
-			max = (GET_X(tmp_list->start) > GET_Y(tmp_list->start)) ? GET_X(tmp_list->start) : GET_Y(tmp_list->start);
+		if (tmp_list->start_x > max || tmp_list->start_y > max)
+			max = (tmp_list->start_x > tmp_list->start_y) ? tmp_list->start_x : tmp_list->start_y;
 		tmp_list = tmp_list->next;
 	}
-	ft_putstr("Square size : ");
-	ft_putnbr(max);
-	ft_putendl("");
 	return (max);
 }
 
@@ -69,7 +65,8 @@ static int	ft_build_list(t_coor **list, char **line, char letter)
 		if ((element = (t_coor*)malloc(sizeof(t_coor))))
 		{
 			element->id = letter;
-			element->start = SET_X(ft_atoi(point)) + SET_Y(ft_atoi(ft_strchr(point, ' ')));
+			element->start_x = ft_atoi(point);
+			element->start_y = ft_atoi(ft_strchr(point, ' '));
 			element->next = NULL;
 		}
 		else
@@ -83,14 +80,60 @@ static int	ft_build_list(t_coor **list, char **line, char letter)
 	return (1);
 }
 
+static int  ft_get_manh_dist(int x1, int y1, int x2, int y2)
+{
+	int dist;
+	int x;
+	int y;
+
+	x = x2 - x1;
+	y = y2 - y1;
+	x *= x < 0 ? -1 : 1;
+	y *= y < 0 ? -1 : 1;
+	dist = x + y;
+	return (dist + 1);
+}
+
+
+static char 	ft_check_point(t_coor **list, char ***map, int cursor_x, int cursor_y, int sqre_size)
+{
+	t_coor *tmp;
+	int min;
+	char min_id;
+
+	if (map && list)
+	{
+		min = sqre_size + sqre_size;
+		tmp = *list;
+		while(tmp)
+		{
+			ft_putchar(tmp->id);
+			if (min > ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y))
+			{
+				ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y);
+				min_id = tmp->id + 32;
+			}
+			else if ( min == ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y))
+				min_id = '.';
+			tmp = tmp->next;
+		}
+		ft_putchar(min_id);
+		return(min_id);
+	}
+	return (0);
+}
+
 int	main(void)
 {
 	int 			fd;
 	int				i;
+	int 			sqre_size;
 	char 			*line;
 	char			letter;
 	t_coor 		*list;
 	char			**map;
+	int			cursor_x;
+	int			cursor_y;
 
 	list = NULL;
 	letter = 'A';
@@ -106,12 +149,37 @@ int	main(void)
 
 	// Find at the maximum size to map before going to infinite with ft_get_square_size()
 	// And build a map of this size with positionnated point.
-	map = ft_build_map(&list, ft_get_square_size(&list) + 1);
+	sqre_size = ft_get_square_size(&list);
+	map = ft_build_map(&list, sqre_size + 1);
 
+	// Determine the value of each point
+	cursor_x = 0;
+	cursor_y = 0;
+	while (cursor_y <= sqre_size)
+	{
+		ft_putstr("[");
+		ft_putnbr(cursor_x);
+		ft_putstr("],");
+		ft_putstr("[");
+		ft_putnbr(cursor_y);
+		ft_putstr("] ->");
+
+		map[cursor_y][cursor_x] = ft_check_point(&list, &map, cursor_x, cursor_y, sqre_size);
+		if (cursor_x == sqre_size)
+		{
+			cursor_x = 0;
+			cursor_y++;
+		}
+		else
+		 	cursor_x += 1;
+		ft_putendl("");
+	}
+
+
+//	ft_fill_map(cursor, map);
 	// Print table
 	i = -1;
 	while(map[++i])
 		ft_putendl(map[i]);
-
 	return (0);
 }
