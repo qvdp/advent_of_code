@@ -4,6 +4,7 @@ NAME = libft.a
 
 SOURCES = ft_get_nline.c\
 			ft_strfill.c\
+			ft_strcount.c\
 			ft_atoi.c\
 		  ft_bzero.c\
 		  ft_itoa.c\

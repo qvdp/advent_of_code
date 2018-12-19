@@ -30,6 +30,7 @@ typedef struct		s_gnl
 }					t_gnl;
 
 int					ft_get_nline(const int fd, char **line);
+int					ft_strcount(const char *s, int c);
 void				ft_strfill(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				ft_putchar(char c);
