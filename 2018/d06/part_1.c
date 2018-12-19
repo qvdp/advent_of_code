@@ -94,7 +94,6 @@ static int  ft_get_manh_dist(int x1, int y1, int x2, int y2)
 	return (dist + 1);
 }
 
-
 static char 	ft_check_point(t_coor **list, char ***map, int cursor_x, int cursor_y, int sqre_size)
 {
 	t_coor *tmp;
@@ -107,18 +106,52 @@ static char 	ft_check_point(t_coor **list, char ***map, int cursor_x, int cursor
 		tmp = *list;
 		while(tmp)
 		{
-			ft_putchar(tmp->id);
 			if (min > ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y))
 			{
-				ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y);
-				min_id = tmp->id + 32;
+				min = ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y);
+				min_id = tmp->id;
 			}
 			else if ( min == ft_get_manh_dist(cursor_x, cursor_y, tmp->start_x, tmp->start_y))
 				min_id = '.';
 			tmp = tmp->next;
 		}
-		ft_putchar(min_id);
 		return(min_id);
+	}
+	return (0);
+}
+
+static int 		ft_count_largest(t_coor **list, char **map, int sqre_size)
+{
+	t_coor *tmp;
+	int i;
+	int max_value;
+	int temp_max;
+	char max_id;
+
+	if (list && map)
+	{
+		tmp = *list;
+		max_value = 0;
+		while (tmp)
+		{
+			i = -1;
+			temp_max = 0;
+			while (map[++i])
+			{
+				if ((i == 0 || i == sqre_size) && (ft_strchr(map[i], tmp->id)))
+					break ;
+				if (map[i][0] == tmp->id || map[i][sqre_size] == tmp->id)
+					break ;
+				temp_max = temp_max + ft_strcount(map[i], tmp->id);
+			}
+			if (temp_max > max_value)
+			{
+				max_value = temp_max;
+				max_id = tmp->id;
+			}
+			tmp = tmp->next;
+		}
+		return (max_value);
 	}
 	return (0);
 }
@@ -126,7 +159,6 @@ static char 	ft_check_point(t_coor **list, char ***map, int cursor_x, int cursor
 int	main(void)
 {
 	int 			fd;
-	int				i;
 	int 			sqre_size;
 	char 			*line;
 	char			letter;
@@ -155,15 +187,8 @@ int	main(void)
 	// Determine the value of each point
 	cursor_x = 0;
 	cursor_y = 0;
-	while (cursor_y <= sqre_size)
+	while (cursor_y <= sqre_size + 1)
 	{
-		ft_putstr("[");
-		ft_putnbr(cursor_x);
-		ft_putstr("],");
-		ft_putstr("[");
-		ft_putnbr(cursor_y);
-		ft_putstr("] ->");
-
 		map[cursor_y][cursor_x] = ft_check_point(&list, &map, cursor_x, cursor_y, sqre_size);
 		if (cursor_x == sqre_size)
 		{
@@ -172,14 +197,7 @@ int	main(void)
 		}
 		else
 		 	cursor_x += 1;
-		ft_putendl("");
 	}
-
-
-//	ft_fill_map(cursor, map);
-	// Print table
-	i = -1;
-	while(map[++i])
-		ft_putendl(map[i]);
+	ft_putnbr(ft_count_largest(&list, map, sqre_size));
 	return (0);
 }
