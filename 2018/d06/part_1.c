@@ -198,6 +198,6 @@ int	main(void)
 		else
 		 	cursor_x += 1;
 	}
-	ft_putnbr(ft_count_largest(&list, map, sqre_size));
+	while 	ft_putnbr(ft_count_largest(&list, map, sqre_size));
 	return (0);
 }
