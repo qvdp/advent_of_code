@@ -1,0 +1,7 @@
+{
+  "name": "d01",
+  "version": "1.0.0",
+  "part-one": "part-one.js",
+  "part-two": "part-two.js",
+  "license": "MIT"
+}
