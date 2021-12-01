@@ -1,0 +1,33 @@
+{
+  "name": "@qvdp/advent_of_code",
+  "version": "0.0.1",
+  "description": "Day 01 from advent of code 2021",
+  "author": {
+    "name": "Quentin Van Der Perre",
+    "email": "q.vanderperre@poulp.us"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qvdp/advent_of_code"
+  },
+  "license": "MIT",
+  "main": "./dist/tsc/index.js",
+  "types": "./dist/tsc/index.d.ts",
+  "scripts": {
+    "lint": "eslint src/ tests/ --ext .js,.jsx,.ts,.tsx",
+    "clean": "rm -rf dist build package",
+    "dev": "nodemon",
+    "start": "ts-node src",
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "esbuild": "^0.11.11",
+    "eslint": "^7.22.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
