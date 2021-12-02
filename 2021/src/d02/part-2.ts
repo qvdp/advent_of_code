@@ -9,7 +9,6 @@ import { Resolver, Moves } from '../_types'
 const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
   const orders: Array<string> = puzzle.split('\n')
-  orders.reduce
   const moves: Moves = {
     horizontal: 0,
     depth: 0,
@@ -27,7 +26,7 @@ const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
       moves.horizontal += +number // foward only
       moves.depth += +number * moves.aim
-      
+
     }
     i++
 
