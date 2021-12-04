@@ -1,4 +1,4 @@
-import { Resolver, Moves } from '../_types'
+import { Resolver, NumberMap } from '../_types'
 
 // GOAL: determine the moves of submarine included aim parameter
 // down X increases your aim by X units.
@@ -9,7 +9,7 @@ import { Resolver, Moves } from '../_types'
 const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
   const orders: Array<string> = puzzle.split('\n')
-  const moves: Moves = {
+  const moves: NumberMap = {
     horizontal: 0,
     depth: 0,
     aim: 0

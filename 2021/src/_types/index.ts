@@ -2,6 +2,6 @@ export interface Resolver {
   (puzzle: string): Promise<string>
 }
 
-export interface Moves {
+export interface NumberMap {
   [key: string]: number
 }

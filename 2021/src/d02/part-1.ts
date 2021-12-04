@@ -1,10 +1,10 @@
-import { Resolver, Moves } from '../_types'
+import { Resolver, NumberMap } from '../_types'
 
 // GOAL: determine the moves of submarine
 const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
   const orders: Array<string> = puzzle.split('\n')
-  const moves: Moves = {
+  const moves: NumberMap = {
     forward: 0,
     down: 0,
     up: 0
