@@ -1,38 +1,46 @@
-import { Resolver, Moves } from '../_types'
+import { Resolver } from '../_types'
 
-// GOAL: determine the moves of submarine included aim parameter
-// down X increases your aim by X units.
-// up X decreases your aim by X units.
-// forward X does two things:
-// It increases your horizontal position by X units.
-// It increases your depth by your aim multiplied by X.
-const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
+// GOAL: determine the 02 & C02 rates
+const rate = (arr: Array<string>, most: boolean, index: number): Array<string> => {
 
-  const orders: Array<string> = puzzle.split('\n')
-  const moves: Moves = {
-    horizontal: 0,
-    depth: 0,
-    aim: 0
-  }
-  let i = 0
-  while (orders[i]) {
+  // Find the most common bit at index position
+  if (arr.length > 1) {
 
-    const [direction, number] = orders[i].split(' ')
-    if (['down', 'up'].includes(direction)) {
-      
-      moves.aim += direction === 'down' ? +number : +number * -1
+    const zero = arr.filter((el: string) => el[index] === '0')
+    const one = arr.filter((el: string) => el[index] === '1')
+    if (most) {
+
+      return one.length >= zero.length ? one : zero
 
     } else {
 
-      moves.horizontal += +number // foward only
-      moves.depth += +number * moves.aim
+      return zero.length <= one.length ? zero : one
 
     }
+
+  }
+  return arr
+
+}
+
+const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
+
+  const binaries: Array<string> = puzzle.split('\n')
+  const byteLength = binaries[0].length
+
+  // Filter binaries to determine oxygen rate & co2 rate
+  let oxygenBinaries = [...binaries]
+  let carbonBinaries = [...binaries]
+  let i = 0
+  while (i < byteLength) {
+
+    oxygenBinaries = rate([...oxygenBinaries], true, i)
+    carbonBinaries = rate(carbonBinaries, false, i)
     i++
 
   }
+  return resolve((parseInt(oxygenBinaries[0], 2) * parseInt(carbonBinaries[0], 2)).toString())
 
-  return resolve((moves.horizontal * moves.depth).toString())
 })
 
 export default resolver
