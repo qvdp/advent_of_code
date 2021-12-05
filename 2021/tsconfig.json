@@ -31,7 +31,7 @@
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
     "allowSyntheticDefaultImports": true,
     "lib": [
-      "es2017"
+      "es2019"
     ],
     "types": [
       "node"
