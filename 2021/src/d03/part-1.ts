@@ -17,21 +17,21 @@ const highest = (arr: Array<string>): string => {
 const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
   const binaries: Array<string> = puzzle.split('\n')
-  const byteNumbers = binaries[0].length
-  let gammaBinary = ''
+  const byteLength = binaries[0].length
+  let gammaByte = ''
   let i = 0
-  while (i < byteNumbers) {
+  while (i < byteLength) {
 
-    gammaBinary = `${gammaBinary}${highest(binaries.map((binary) => binary[i]))}`
+    gammaByte = `${gammaByte}${highest(binaries.map((binary) => binary[i]))}`
     i++
 
   }
-  const epsilonBinary = gammaBinary
+  const epsilonByte = gammaByte
     .split('')
     .map((c: string) => c === '0' ? '1' : '0')
     .join('')
 
-  return resolve((parseInt(gammaBinary, 2) * parseInt(epsilonBinary, 2)).toString())
+  return resolve((parseInt(gammaByte, 2) * parseInt(epsilonByte, 2)).toString())
 
 })
 
