@@ -20,3 +20,9 @@ export interface BingoBoardEnriched {
   solved: boolean,
   solution: number
 }
+
+export interface Line {
+  start: Array<number>,
+  end: Array<number>,
+  originalStr: string
+}
