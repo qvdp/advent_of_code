@@ -16,5 +16,5 @@ import getPuzzle from './puzzle-parser'
   const result: string = await resolver(puzzle)
 
   // Print results
-  console.log(`[${day}/${part}] Solved in ${Math.ceil(process.hrtime(timer)[1] / 1e6)}ms, answer is`, result)
+  console.log(`[${day}/${part}] Solved in ${Math.ceil((process.hrtime(timer)[0] * 1000000000 + process.hrtime(timer)[1]) / 1e6)}ms, answer is`, result)
 })()
