@@ -1,35 +1,30 @@
 import { Resolver, NumberMap } from '../_types'
 
 // Compute reproduction cycle of lantern fish at X days
-const computeReproductionCycle = (startingFrom: number, days: number): number => {
+const computeReproductionCycle = (startingFrom: Array<number>, days: number): Array<number> => {
   
   // Simulate fishes birth
-  const fishes = [startingFrom]
   while (days) {
 
-    let birthsCounter = 0
-    let numberOfFishes = fishes.length
-    while (numberOfFishes) {
+    // Determine number of new fish
+    const [births] = startingFrom
 
-      const fish = fishes[numberOfFishes - 1]
-      const newCounter = fish - 1
-      if (newCounter < 0) {
+    // Translate birth counter
+    let i = 0
+    while (startingFrom[i + 1] >= 0) {
 
-        birthsCounter++
-
-      }
-      fishes[numberOfFishes - 1] = newCounter >= 0 ? newCounter : 6
-      numberOfFishes--
+      startingFrom[i] = startingFrom[i + 1]
+      i++
 
     }
-    while (birthsCounter) {
-      fishes.push(8)
-      birthsCounter--
-    }
+
+    // Append new birth
+    startingFrom.splice(-1, 1, births) 
+    startingFrom[6] += births
     days--
 
   }
-  return fishes.length
+  return startingFrom
 
 }
 
@@ -57,24 +52,19 @@ const resolver: Resolver = async (puzzle) => new Promise((resolve) => {
 
   }, {})
 
-  // For each sort of fish, determine its reproduction cycle
-  const days = 250
-  const reproductionCycleMap: NumberMap = {}
-  console.log(fishMap)
+  // Build array of fishes
+  const arr = new Array(9).fill(0)
   Object.keys(fishMap).forEach((fishSort) => {
 
-    Object.assign(reproductionCycleMap, { [fishSort]: computeReproductionCycle(+fishSort, days) })
+    arr[+fishSort] = fishMap[+fishSort]
 
   })
-
-  // Sum reproduction cycles map of each fishes
-  let solution = 0
-  Object.keys(fishMap).forEach((fishSort) => {
-
-    solution += fishMap[fishSort] * reproductionCycleMap[fishSort]
-
-  })
-  return resolve(`${solution}`)
+  
+  // Solve problem
+  const days = 256
+  const solutions = (computeReproductionCycle(arr, days))
+  
+  return resolve(`${solutions.reduce((prev, curr) => prev + curr)}`)
 
 })
 
