@@ -6,6 +6,14 @@ export interface NumberMap {
   [key: string]: number
 }
 
+export interface StringMap {
+  [key: string]: string
+}
+
+export interface ArrayStringMap {
+  [key: string]: Array<string>
+}
+
 export interface BingoBoard {
   rows: Array<Array<number>>,
   columns: Array<Array<number>>,
