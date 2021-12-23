@@ -34,3 +34,13 @@ export interface Line {
   end: Array<number>,
   originalStr: string
 }
+
+export interface Dot {
+  i: number,
+  j: number
+}
+
+export interface FoldOrder {
+  direction: string,
+  value: number
+}
