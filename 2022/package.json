@@ -1,0 +1,40 @@
+{
+  "name": "@qvdp/advent_of_code",
+  "version": "0.0.1",
+  "description": "Day 01 from advent of code 2021",
+  "author": {
+    "name": "Quentin Van Der Perre",
+    "email": "q.vanderperre@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qvdp/advent_of_code"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">= 16"
+  },
+  "files": [
+    "src"
+  ],
+  "source": "src/index.js",
+  "module": "dist/main.js",
+  "targets": {
+    "main": false,
+    "browser": false
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test:units": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test jest --config jest.config.json --collect-coverage=false",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test jest --config jest.config.json --ci --colors --json --outputFile=coverage/report.json",
+    "build": "parcel build",
+    "clean": "rm -rf dist coverage .parcel-cache"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-plugin-jest": "^26.1.3",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^27.5.1",
+    "parcel": "^2.4.1"
+  }
+}
