@@ -47,3 +47,15 @@ test('[04/part_2] should work', async () => {
   const PART_2 = 'part-2'
   await main(DAY, PART_2)
 });
+
+test('[05/part_1] should work', async () => {
+  const DAY = 'd05'
+  const PART_1 = 'part-1'
+  await main(DAY, PART_1)
+});
+
+test('[05/part_2] should work', async () => {
+  const DAY = 'd05'
+  const PART_2 = 'part-2'
+  await main(DAY, PART_2)
+});
