@@ -1,17 +1,7 @@
+import { sliceIntoChunks } from '../common/strings'
+
 const STACKS_MOVES_SEPRATOR = '\n\n'
 const LINE_SEPERATOR = '\n'
-
-const sliceIntoChunks = (string, size) => {
-
-  const chunks = []
-  for (let i = 0; i < string.length; i += size) {
-
-    chunks.push(string.slice(i, i + size).trim())
-
-  }
-  return chunks
-
-}
 
 const getStacks = (puzzle) => {
 
@@ -27,7 +17,10 @@ const getStacks = (puzzle) => {
   while (i < (groupedStacksLines.length - 1)) {
 
     // Reduce this level of stacks into chunks of length 4 (crates)
-    const currentStacksLevelCrates = sliceIntoChunks(groupedStacksLines[i], 4)
+    const currentStacksLevelCrates = sliceIntoChunks(
+      groupedStacksLines[i],
+      4,
+      { trim: true })
 
     // Create a list of stacks
     currentStacksLevelCrates.forEach((crate, index) => {
