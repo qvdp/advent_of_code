@@ -119,3 +119,23 @@ test('[06/part_2] should work', async () => {
     throw new error('E_WRONG_ANSWER')
   }
 });
+
+test('[07/part_1] should work', async () => {
+  const DAY = 'd07'
+  const PART_1 = 'part-1'
+  const EXPECTED = 1908462
+  const answer = await main(DAY, PART_1)
+  if (answer !== EXPECTED) {
+    throw new error('E_WRONG_ANSWER')
+  }
+});
+
+test('[07/part_2] should work', async () => {
+  const DAY = 'd07'
+  const PART_2 = 'part-2'
+  const EXPECTED = 3979145
+  const answer = await main(DAY, PART_2)
+  if (answer !== EXPECTED) {
+    throw new error('E_WRONG_ANSWER')
+  }
+});
