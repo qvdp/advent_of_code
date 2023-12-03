@@ -1,0 +1,5 @@
+
+root: true
+extends: ['eslint:recommended','plugin:node/recommended','plugin:jest/recommended']
+parserOptions:
+  ecmaVersion: 2020

@@ -1,0 +1,36 @@
+{
+  "name": "@qvdp/advent_of_code",
+  "version": "0.0.1",
+  "description": "Day 01 from advent of code 2021",
+  "author": {
+    "name": "Quentin Van Der Perre",
+    "email": "q.vanderperre@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qvdp/advent_of_code"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">= 16"
+  },
+  "files": [
+    "src"
+  ],
+  "source": "src/index.js",
+  "module": "dist/main.js",
+  "targets": {
+    "main": false,
+    "browser": false
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test jest --config jest.config.json --collect-coverage=false"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^29.7.0"
+  }
+}
