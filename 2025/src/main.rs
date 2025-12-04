@@ -10,7 +10,7 @@ struct Solution {
 }
 
 fn main() {
-    let day: Option<u32> = args().skip(1).next().and_then(|arg| arg.parse().ok());
+    let day: Option<u32> = args().nth(1).and_then(|arg| arg.parse().ok());
 
     let solutions = get_solutions();
 
@@ -49,24 +49,24 @@ fn run_solution((stars, duration): (u32, Duration), solution: &Solution) -> (u32
 }
 
 macro_rules! days {
-    ($($day:tt),*) => {
-        fn get_solutions() -> Vec<Solution> {
-            vec![$({
-                Solution {
-                    day: stringify!($day).unsigned(),
-                    wrapper: |data: &str| {
-                        use aoc::days::$day::*;
+  ($($day:tt),*) => {
+    fn get_solutions() -> Vec<Solution> {
+      vec![$({
+        Solution {
+          day: stringify!($day).unsigned(),
+          wrapper: |data: &str| {
+            use aoc::days::$day::*;
 
-                        let input = parse(data);
-                        let part1 = part1(&input).to_string();
-                        let part2 = part2(&input).to_string();
+            let input = parse(data);
+            let part1 = part1(&input).to_string();
+            let part2 = part2(&input).to_string();
 
-                        (part1, part2)
-                    }
-                }
-            },)*]
+            (part1, part2)
+          }
         }
+      },)*]
     }
+  }
 }
 
-days!(d01, d02, d03);
+days!(d01, d02, d03, d04);
