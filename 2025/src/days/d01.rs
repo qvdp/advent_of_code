@@ -1,4 +1,4 @@
-//! # Secret Entrance
+//! # Day 1: Secret Entrance
 
 #[derive(Debug)]
 pub enum Direction {
