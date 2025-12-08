@@ -18,5 +18,5 @@ library!(util "Utility modules to handle common recurring Advent of Code pattern
 );
 
 library!(days "All Advent of Code 2025 solutions."
-  d01, d02, d03, d04, d05
+  d01, d02, d03, d04, d05, d06
 );
