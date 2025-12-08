@@ -71,9 +71,14 @@ impl<T> Grid<T> {
         (p.y * self.width + p.x) as usize
     }
 
+    pub fn row(&self, y: i32) -> impl Iterator<Item = &T> {
+        (0..self.width).map(move |x| &self[Point::new(x, y)])
+    }
+
     pub fn points(&self) -> impl Iterator<Item = Point> {
         let w = self.width;
         let h = self.height;
+        
         // flat_map permet d'aplatir la double boucle (y, x) en une seule liste
         (0..h).flat_map(move |y| (0..w).map(move |x| Point::new(x, y)))
     }
@@ -109,7 +114,7 @@ impl<T> Grid<T> {
 }
 
 // =========================================================
-// 3. TRAITS (La "Magie" syntaxique)
+// 3. TRAITS
 // =========================================================
 
 // read access : grid[point] -> T
