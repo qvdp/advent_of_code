@@ -69,4 +69,4 @@ macro_rules! days {
   }
 }
 
-days!(d01, d02, d03, d04, d05, d06, d07);
+days!(d01, d02, d03, d04, d05, d06, d07, d08);
